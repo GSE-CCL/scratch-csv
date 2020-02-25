@@ -44,6 +44,7 @@ function studio_stats(studio_num) {
         file_objects.push(proj_json)
     }
 
+
     // create csv file
     f = fs.createWriteStream("teststudio" + studio_num + "_data.csv");
     // f = fs.createWriteStream("studio" + studio_num + "_data.csv");
@@ -67,8 +68,11 @@ function studio_stats(studio_num) {
         f.write("\n")
 
         // run analysis for each project JSON and write values to csv
-        for (var i = 0; i < file_objects.length; i++) {
+        var i  = 0
+        
+        function josh () {
             analysis(file_objects[i], function (err, proj) {
+
                 if (!proj) {
                     console.log(project_ids[i] + " problem")
                 }
@@ -76,6 +80,7 @@ function studio_stats(studio_num) {
 
                     // get proj author information
                     var proj_meta_url = 'https://api.scratch.mit.edu/projects/' + project_ids[i];
+
                     try {
                         var proj_meta_data = JSON.parse(request('GET', proj_meta_url).getBody());
                         var proj_author_id = proj_meta_data.author.id
@@ -135,9 +140,22 @@ function studio_stats(studio_num) {
 
                     f.write("\n")
                 }
+                i++;
+                if (i < file_objects.length) {
+                    
+                    josh();
+                    
+                }
+                else {
+                    f.end();
+                }
+                
             });
+
         }
-        f.end();
+        josh();
+        
+
     });
 };
 
