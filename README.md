@@ -4,7 +4,7 @@ A simple script that uses the Scratch Analyzer (https://github.com/llk/scratch-a
 Developed for the Creative Computing Lab at the Harvard Graduate School of Education.
 
 ## Setup
-1. Make sure you've install Node.js and npm.
+1. Make sure you've installed Node.js and npm.
 2. Navigate the terminal to the downloaded repository. 
 3. Run `npm install scratch-analysis` and `npm install sync-request`.
 4. You should be all set!
